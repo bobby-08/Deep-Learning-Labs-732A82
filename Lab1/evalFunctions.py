@@ -7,14 +7,14 @@ def calcAccuracy(LPred, LTrue):
         LPred (array): Predicted data labels.
         LTrue (array): Ground truth data labels.
 
-    Retruns:
+    Returns:
         acc (float): Prediction accuracy.
     """
 
     # --------------------------------------------
     # === Your code here =========================
     # --------------------------------------------
-    acc = np.sum(LPred == LTrue) / len(LTrue)
+    acc = float(np.mean(LPred == LTrue))
     # ============================================
     return acc
 
@@ -32,13 +32,14 @@ def calcConfusionMatrix(LPred, LTrue):
     """
 
     # --------------------------------------------
-    # === Your code here =========================
+    labels = np.unique(np.concatenate([LTrue, LPred])) 
+    C = labels.size
+    label_to_idx = {lab: i for i, lab in enumerate(labels)}
+
+    cM = np.zeros((C, C), dtype=int)
+    for p, t in zip(LPred, LTrue):
+        cM[label_to_idx[p], label_to_idx[t]] += 1
     # --------------------------------------------
-    classes = np.union1d(LPred, LTrue)
-    K = len(classes)
-    cM = np.zeros((K, K))
-    for i in range(len(LTrue)):
-        cM[LTrue[i], LPred[i]] += 1
     # ============================================
 
     return cM
@@ -56,9 +57,10 @@ def calcAccuracyCM(cM):
     """
 
     # --------------------------------------------
-    # === Your code here =========================
+    correct = np.trace(cM)
+    total = cM.sum()
     # --------------------------------------------
-    acc = np.sum(np.diag(cM)) / np.sum(cM)
+    acc = correct / total
     # ============================================
     
     return acc

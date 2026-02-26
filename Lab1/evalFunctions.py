@@ -14,7 +14,11 @@ def calcAccuracy(LPred, LTrue):
     # --------------------------------------------
     # === Your code here =========================
     # --------------------------------------------
+<<<<<<< HEAD
     acc = np.sum(LPred == LTrue) / len(LTrue)
+=======
+    acc = float(np.mean(LPred == LTrue))
+>>>>>>> fd9afacc2ec881d051145b30117d032e391cb4aa
     # ============================================
     return acc
 
@@ -34,11 +38,14 @@ def calcConfusionMatrix(LPred, LTrue):
     # --------------------------------------------
     # === Your code here =========================
     # --------------------------------------------
+<<<<<<< HEAD
     classes = np.union1d(LPred, LTrue)
     K = len(classes)
     cM = np.zeros((K, K))
     for i in range(len(LTrue)):
         cM[LTrue[i], LPred[i]] += 1
+=======
+>>>>>>> fd9afacc2ec881d051145b30117d032e391cb4aa
     # ============================================
 
     return cM
@@ -58,7 +65,11 @@ def calcAccuracyCM(cM):
     # --------------------------------------------
     # === Your code here =========================
     # --------------------------------------------
+<<<<<<< HEAD
     acc = np.sum(np.diag(cM)) / np.sum(cM)
+=======
+    acc = correct / total
+>>>>>>> fd9afacc2ec881d051145b30117d032e391cb4aa
     # ============================================
     
     return acc
